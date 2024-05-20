@@ -1,14 +1,15 @@
 import random
 
+
 words = ['ciorba', 'scrisoare', 'animal', 'date', 'ananas']
 
 def get_random_word():
     return random.choice(words)
-"""
-Returneaza un cuvant aleatoriu din lista words
-"""
+    """
+    Returneaza un cuvant aleatoriu din lista words
+    """
 
-def display_board(missed_letters, correct_letters, secret_word,tries):
+def display_board(missed_letters, correct_letters, secret_word, tries):
     """
     Ce apare in timpul jocului
     """
@@ -26,7 +27,7 @@ def display_board(missed_letters, correct_letters, secret_word,tries):
 
 def get_guess(already_guessed):
     """
-    Mesajele cu referire la litera introdusa
+    Pentru a introduce litera si pentru afisarea mesajlor cu referire la litera introdusa
     """
     while True:
         guess = input('Guess a letter: ').lower()
@@ -38,14 +39,17 @@ def get_guess(already_guessed):
             return guess
 
 def play_hangman():
-    """Jocul in sine. Arata ce litere au fost folosite, iar literele corecte le arata unde sunt in cuvant"""
+    """
+    Arata ce litere au fost folosite, literele corecte le arata unde sunt in cuvant si
+    afiseaza mesajele pentru finalul jocului
+    """
     tries = 6
     secret_word = get_random_word()
     correct_letters = ''
     missed_letters = ''
 
     while True:
-        display_board(missed_letters, correct_letters, secret_word,tries)
+        display_board(missed_letters, correct_letters, secret_word, tries)
         guess = get_guess(missed_letters + correct_letters)
 
         if guess in secret_word:
@@ -63,9 +67,8 @@ def play_hangman():
         else:
             missed_letters += guess
             tries -= 1
-            print(display_hangman(tries))
             if tries == 0:
-                display_board(missed_letters, correct_letters, secret_word,tries)
+                display_board(missed_letters, correct_letters, secret_word, tries)
                 print('You have run out of guesses!\nAfter ' + str(len(missed_letters)) + ' missed guesses and ' + str(len(correct_letters)) + ' correct guesses, the word was "' + secret_word + '"')
                 break
 

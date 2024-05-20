@@ -2,7 +2,7 @@ import unittest
 from hangman1 import get_random_word, display_board, get_guess, play_hangman, display_hangman
 import logging
 
-logging.basicConfig(filename='test_log.log', level=logging.INFO)
+logging.basicConfig(filename='test_log.log', filemode='w', format='%(name)s - %(levelname)s - %(messages)s')
 
 class functia1(unittest.TestCase):
 
@@ -17,7 +17,7 @@ class functia1(unittest.TestCase):
     Verifica daca cuvantul returnat este un string
     """
     def test_correct_lenght(self):
-        secret_word=get_random_word()
+        secret_word = get_random_word()
         assert len(secret_word) in range(4,10)
     """
     Verifica daca cuvantul secret este mai mic sau mai lung fata de 
@@ -42,9 +42,12 @@ class functia2(unittest.TestCase):
     Verifica cum arata jocul
     """
 class functia3(unittest.TestCase):
-    def test_function(self):
-        already_guessed = 'mno'
-        get_guess(already_guessed)
+    def test_guess_lower(self):
+        guess = input('Guess a letter: ').lower()
+        self.assertTrue(guess.islower())
+    """
+    Testeaza daca litera intodusa este scrisa mica
+    """
     def test_get_guess(self):
         already_guessed = 'abc'
         guess = get_guess(already_guessed)
@@ -66,7 +69,7 @@ class functia4(unittest.TestCase):
     def test_play_hangman(self):
         play_hangman()
     """
-    Verifica daca jocul este jucat corect
+    Verifica daca jocul ruleaza corect
     """
     def test_finish_message(self):
         missed_letters = 'abcd'
@@ -116,4 +119,4 @@ class functi5(unittest.TestCase):
         """
 if __name__ == '__main__':
     unittest.main()
-    logging.info("Teste rulate cu succes!")
+    logging.warning("Teste rulate cu succes!")
